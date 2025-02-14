@@ -10,8 +10,11 @@ exports.createComment = async (req, res) => {
       data: {
         text,
         post: { connect: { id: postId } },
-        user: { connect: { id: userId } }, // Connect to the user
+        user: { connect: { id: userId } },
       },
+      include: { 
+        user: true // This will include the user data in the response
+      }
     });
     res.status(201).json(comment);
   } catch (error) {
